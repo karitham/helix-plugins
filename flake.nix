@@ -8,11 +8,16 @@
         description = args.description or "<no description provided>";
         version = args.version or "<unknown>";
         inherit (args) main name src;
+        config = args.config or "";
       };
     
     mkPluginsScm = plugins:
       builtins.concatStringsSep "\n"
-        (map (p: "(require \"${p.src}/${p.main}\")") plugins);
+        (map (p: let
+          req = "(require \"${p.src}/${p.main}\")";
+        in
+          if p.config != "" then "${req}\n${p.config}" else req
+        ) plugins);
 
     plugins = import ./plugins {
       inherit mkPlugin;
