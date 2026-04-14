@@ -36,8 +36,12 @@
         default = [];
       };
 
-      config.home.file.".config/helix/plugins.scm".text =
-        mkPluginsScm config.programs.helix.plugins;
+      config.xdg.configFile = {
+        "helix/plugins.scm".text =
+          mkPluginsScm config.programs.helix.plugins;
+
+        "helix/init.scm".text = "(require \"plugins.scm\")";
+      };
     };
   };
 }
