@@ -1,4 +1,5 @@
-{ mkPlugin }: mkPlugin {
+{ mkPlugin }:
+mkPlugin {
   name = "scooter.hx";
   description = "Interactive find-and-replace Helix plugin";
 
